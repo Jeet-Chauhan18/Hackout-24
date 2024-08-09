@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repository Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            border: 2px solid black;
+            padding: 20px;
+            background-color: #ffffff;
+            flex-direction: column;
+            width: 500px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .form-group label {
+            width: 30%;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 65%;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid black;
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="repoForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="repoName">Name:</label>
+                <input type="text" id="repoName" name="repoName" required>
+            </div>
+            <div class="form-group">
+                <label for="repoDetails">Details:</label>
+                <textarea id="repoDetails" name="repoDetails" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>File:</label>
+                <input type="file" id="fileInput" name="fileInput" required>
+            </div>
+            <div class="buttons">
+                <button type="reset">Reject</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const repoName = document.getElementById('repoName').value;
+            const repoDetails = document.getElementById('repoDetails').value;
+            const fileName = document.getElementById('fileInput').files[0] ? document.getElementById('fileInput').files[0].name : 'No file chosen';
+
+            alert(`Repository Name: ${repoName}\nDetails: ${repoDetails}\nFile: ${fileName}`);
+        }
+    </script>
+</body>
+</html>
