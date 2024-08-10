@@ -17,7 +17,7 @@ const repoSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    files: [fileSchema]  // Array of files associated with the repo
+    files: [fileSchema]  
 });
 
 const Repo = mongoose.model('Repo', repoSchema);

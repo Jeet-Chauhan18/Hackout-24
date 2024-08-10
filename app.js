@@ -45,11 +45,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
+app.use(express.static('public'));
+
 // Database connection
 mongoose.connect('mongodb://localhost/github_like_app', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+
 
 // Routes
 const authRoutes = require('./routes/auth');

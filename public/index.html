@@ -1,0 +1,163 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+ </head>
+<div class="header">
+    <div class="mid-spot" onclick="document.body.classList.toggle('gold');"></div>
+    <button class="contact-btn">
+      <span class="glow"></span>
+      
+      <a href="https://github.com/Jeet-Chauhan18/Hackout-24">
+        <span class="contact-btn-content">Goto Repo</span>
+      </a>
+
+    </button>
+    <form action="/auth/login" method="get">
+      <button type="submit" class="contact-btn" id="login-btn">Login</button>
+    </form>
+    <form action="/auth/register" method="get">
+      <button type="submit" class="contact-btn" id="signup-btn">Signup</button>
+    </form>
+    
+    <div class="spotlight">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  
+  <canvas id="particleCanvas"></canvas>
+  
+  <div class="accent-lines">
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div class="heroSubP">
+    <p>Introducing</p>
+  </div>
+  <div class="hero">
+    <div class="heroT">
+      <h2>SpaceHub</h2>
+      <h2>SpaceHub</h2>
+    </div>
+  </div>
+  <p class="heroP">The world's only platform, <br>
+    for space-projects deployment</p>
+    <div class="mountains">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="hero-spacer"></div>
+  
+  <div class="content-section">
+    <div class="content-acc">
+      <div></div>
+      <div></div>
+    </div>
+    <p class="subt">Revolutionary by design</p>
+    <h3 class="title">Innovate. Motivate.<br>
+      Find the right people.</h3>
+      <p class="subp">This is a platform that allows researchers to deploy their projects and researchs and showcase their knowledge.</p>
+    </div>
+    
+    
+    <script>
+
+
+
+      const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+
+// Initial canvas size
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+let particleCount = calculateParticleCount();
+
+class Particle {
+    constructor() {
+        this.reset();
+        this.y = Math.random() * canvas.height;
+        this.fadeDelay = Math.random() * 600 + 100;
+        this.fadeStart = Date.now() + this.fadeDelay;
+        this.fadingOut = false;
+    }
+
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.speed = Math.random() / 5 + 0.1;
+        this.opacity = 1;
+        this.fadeDelay = Math.random() * 600 + 100;
+        this.fadeStart = Date.now() + this.fadeDelay;
+        this.fadingOut = false;
+    }
+
+    update() {
+        this.y -= this.speed;
+        if (this.y < 0) {
+            this.reset();
+        }
+
+        if (!this.fadingOut && Date.now() > this.fadeStart) {
+            this.fadingOut = true;
+        }
+        
+        if (this.fadingOut) {
+            this.opacity -= 0.008;
+            if (this.opacity <= 0) {
+                this.reset();
+            }
+        }
+    }
+
+    draw() {
+        ctx.fillStyle = `rgba(${255 - (Math.random() * 255/2)}, 255, 255, ${this.opacity})`;
+        ctx.fillRect(this.x, this.y, 0.4, Math.random() * 2 + 1);
+    }
+}
+
+function initParticles() {
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+    requestAnimationFrame(animate);
+}
+
+function calculateParticleCount() {
+    return Math.floor((canvas.width * canvas.height) / 6000);
+}
+
+function onResize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particleCount = calculateParticleCount();
+    initParticles();
+}
+
+window.addEventListener('resize', onResize);
+
+initParticles();
+animate();
+    </script>

@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-// Register route
 router.get('/register', (req, res) => {
     res.render('register');
 });
@@ -20,20 +19,6 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-// router.post('/login', async (req, res) => {
-//     const { email, password } = req.body;
-//     console.log(email);
-//     console.log(password);
-//     const user = await User.findOne({ email });
-//     if (user && (await user.comparePassword(password))) {
-//         const token = jwt.sign({ userId: user._id }, 'your_jwt_secret');
-//         res.cookie('token', token, { httpOnly: true });
-//         res.redirect('/repo/dashboard');
-//     } else {
-//         console.log("auth failed");
-//         res.redirect('/auth/login');
-//     }
-// });
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
