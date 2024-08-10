@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= repo.name %></title>
+</head>
+<body>
+    <h1><%= repo.name %></h1>
+    <p><%= repo.description %></p>
+    <h2>Files</h2>
+    <ul>
+        <% repo.files.forEach(file => { %>
+            <li>
+                <a href="<%= file.path %>" target="_blank">Download File</a>
+                (Size: <%= file.size %> bytes)
+            </li>
+        <% }) %>
+    </ul>
+    <a href="/repo/dashboard">Back to Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard</title>
+</head>
+<body>
+    <h1>Top Repositories</h1>
+    <ul>
+        <% repos.forEach(repo => { %>
+            <li>
+                <strong><%= repo.name %></strong> by <%= repo.user.username %>: <%= repo.description %> 
+                (<%= repo.likes %> likes)
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>
