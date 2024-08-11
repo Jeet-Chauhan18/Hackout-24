@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const MongoURI = process.env.MongoURI
+// const MongoURI = process.env.MongoURI
 
-mongoose.connect(MongoURI)
+// mongoose.connect(MongoURI)
 
 
 const userSchema = new mongoose.Schema({

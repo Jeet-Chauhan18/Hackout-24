@@ -6,13 +6,14 @@ const path = require('path');
 const multer = require('multer');  
 const app = express();
 
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
 
-mongoose.connect('mongodb://localhost/github_like_app', {
+mongoose.connect('mongodb+srv://jlinux1999:a94YRaRwDvwSdFSt@cluster0.ltz8qfj.mongodb.net/spacehub', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
