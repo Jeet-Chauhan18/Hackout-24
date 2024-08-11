@@ -8,7 +8,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #010409;
         }
 
         .container {
@@ -61,8 +61,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #ecf0f1;
+            background-color: #010409;
             padding: 10px 20px;
+            border-bottom: solid 1px #434b53;
+            border-radius: 8px;  
         }
 
         .search-bar input {
@@ -78,6 +80,7 @@
         .user-info {
             display: flex;
             flex-direction: row-reverse;
+            color: #E6EDF3;
             align-items: center;
         }
 
@@ -100,9 +103,14 @@
             gap: 20px;
         }
 
+        .content h3{
+            color : #E6EDF3;
+
+        }
         .card {
-            background-color: white;
+            background-color: #0D1117;
             padding: 20px;
+            border: solid 1px #434b53;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -110,6 +118,45 @@
         .card h3 {
             margin-top: 0;
             font-size: 22px;
+        }
+
+        .inp{
+            margin-bottom: 15px;
+            padding: 5px;
+            width: 180px;
+            height: 40px;
+            color: #89929C;
+            border: solid 2px #434b53 ;
+            border-radius: 4px;
+            background-color: #161B22;
+        }
+        .inp-big{
+            text-align: left;
+            justify-content: center;
+            margin-bottom: 15px;
+            width: 270px;
+            height: 30px;
+            color: #89929C;
+            border: solid 2px #434b53 ;
+            border-radius: 4px;
+            background-color: #161b227c;
+        }
+        .btn{
+            color: rgba(255, 255, 255, 0.952);
+            font-weight: 600;
+            width: 150px;
+            height: 40px;
+            background-color: #2776EA;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+        }
+        li{
+            color:white
+        }
+        .name{
+            color: white;
+            text-transform: capitalize;
         }
     </style>
 </head>
@@ -119,8 +166,8 @@
         <nav class="sidebar">
             <h2>Dashboard</h2>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Analytics</a></li>
+                <li><a href="/repo/dashboard">Home</a></li>
+                <li><a href="/repo/all">Repos</a></li>
                 <li><a href="#">Reports</a></li>
                 <li><a href="#">Settings</a></li>
             </ul>
@@ -145,9 +192,9 @@
                 <div class="card">
                     <h3>Your Repositories</h3>
                     <form action="/repo/create" method="POST">
-                        <input type="text" name="name" placeholder="Repository Name" required><br>
-                        <textarea name="description" placeholder="Repository Description"></textarea><br>
-                        <button type="submit">Create Repository</button>
+                        <input type="text" name="name" class="inp" placeholder="Repository Name" required><br>
+                        <textarea name="description" class="inp-big" placeholder="Repository Description"></textarea><br>
+                        <button type="submit" class="btn">Create Repository</button>
                     </form>
                 </div>
                 
@@ -156,8 +203,9 @@
                     <ul>
                         <% repos.forEach(repo => { %>
                             <li>
-                                <strong><%= repo.name %></strong>: <%= repo.description %> 
-                                (<%= repo.likes %> likes)
+
+                                <strong><p class="name"><%= repo.name %></p></strong>: <%= repo.description %> 
+                                (<%= repo.likes %> "likes")
                                 <form action="/repo/<%= repo._id %>/like" method="POST" style="display:inline;">
                                     <button type="submit">Like</button>
                                 </form>

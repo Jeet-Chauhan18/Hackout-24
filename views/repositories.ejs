@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repositories</title>
+    <link rel="stylesheet" href="/path-to-your-css-file.css">
+</head>
+<body>
+    <h1>All Repositories</h1>
+    <div class="repository-list">
+        <% if (repositories && repositories.length > 0) { %>
+            <% repositories.forEach(function(repo) { %>
+                <div class="repository-item">
+                    <h2><%= repo.title %></h2>
+                    <p><%= repo.description %></p>
+                    <p>Owned by: <%= repo.user.username %></p>
+                   
+                    <form action="/like/<%= repo._id %>" method="POST">
+                        <button type="submit">Like</button>
+                    </form>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>No repositories found.</p>
+        <% } %>
+    </div>
+</body>
+</html>
