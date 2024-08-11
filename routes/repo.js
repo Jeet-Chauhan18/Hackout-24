@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const AWS = require('aws-sdk');
 const multer = require('multer');
+
 const path = require('path');
 const fs = require('fs');
 
@@ -20,6 +21,11 @@ const s3 = new AWS.S3({
     signatureVersion: 'v4'
 });
 
+// const storage = multer.memoryStorage();
+// const upload = multer({ storage });
+
+
+// const upload = multer({ storage: memoryStorage });
 const upload = multer({ dest: 'uploads/' });
 
 async function uploadFile(bucketName, file, repoId) {
