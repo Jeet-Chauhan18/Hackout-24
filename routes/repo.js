@@ -82,6 +82,15 @@ router.get('/dashboard', isAuthenticated, async (req, res) => {
     res.render('dashboard', { repos });
 });
 
+router.get("/all", isAuthenticated, async(req,res)=>{
+    try {
+        const repositories = await Repo.find().populate('user', 'name');
+        res.render('repositories', { repositories });
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    });
+
 router.post('/create', isAuthenticated, async (req, res) => {
     const { name, description } = req.body;
     const repo = new Repo({ name, description, user: req.userId });
@@ -89,13 +98,32 @@ router.post('/create', isAuthenticated, async (req, res) => {
     res.redirect('/repo/dashboard');
 });
 
+// router.post('/:id/like', isAuthenticated, async (req, res) => {
+//     const repo = await Repo.findById(req.params.id);
+//     repo.likes += 1;
+//     await repo.save();
+//     res.redirect('/repo/dashboard');
+// });
 router.post('/:id/like', isAuthenticated, async (req, res) => {
-    const repo = await Repo.findById(req.params.id);
-    repo.likes += 1;
-    await repo.save();
-    res.redirect('/repo/dashboard');
-});
-
+    try {
+        const repo = await Repo.findById(req.params.repoId);
+        const userId = req.user._id;
+        console.log(userId)
+        console.log(repoId)
+        // Check if the user already liked the repository
+        if (repo.likes.includes(userId)) {
+          return res.status(400).json({ msg: "You have already liked this repository." });
+        }
+    
+        // Add the user's like
+        repo.likes.push(userId);
+        await repo.save();
+    
+        res.json({ msg: "Repository liked!", likes: repo.likes.length });
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    });
 
 router.post('/:id/upload', isAuthenticated, upload.single('file'), async (req, res) => {
     const repoId = req.params.id;

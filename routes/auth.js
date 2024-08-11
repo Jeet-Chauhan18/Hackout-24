@@ -9,8 +9,19 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
-    const user = new User({ username, email, password });
-    await user.save();
+    // const existingUser = user.findOne(email, password)
+    // if(existingUser){
+    //     res.status(403).json({msg: "User already exists"})
+    //     return
+    // }
+    try{
+        const user = new User({ username, email, password });
+        await user.save();
+
+    }catch(err){
+        res.status(403).json({msg: err})
+        return
+    }
     res.redirect('/auth/login');
 });
 

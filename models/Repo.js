@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const MongoURI = process.env.MongoURI
+
+mongoose.connect(MongoURI)
 
 const fileSchema = new mongoose.Schema({
     name: String,
